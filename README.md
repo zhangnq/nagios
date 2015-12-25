@@ -19,3 +19,4 @@ centos：setup/nagios_client/centos.sh
 
 插件脚本：
 
+aaa
