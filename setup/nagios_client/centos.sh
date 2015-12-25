@@ -47,7 +47,7 @@ make install-plugin
 make install-daemon
 make install-daemon-config
 cd ..
-sed -i 's/allowed_hosts=.*/allowed_hosts=127.0.0.1,211.149.224.199/g' /usr/local/nagios/etc/nrpe.cfg
+sed -i 's/allowed_hosts=.*/allowed_hosts=127.0.0.1/g' /usr/local/nagios/etc/nrpe.cfg
 cnt=`grep -c "/usr/local/nagios/bin/nrpe -c /usr/local/nagios/etc/nrpe.cfg -d" /etc/rc.local`
 if [ $cnt -eq 0 ];then
 	#sed -i '/.*exit 0.*/i\/usr/local/nagios/bin/nrpe -c /usr/local/nagios/etc/nrpe.cfg -d' /etc/rc.local
