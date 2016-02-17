@@ -56,4 +56,20 @@ python NotifyByWeixin.py 通知内容
 
 ###配置
 
-nagios配置略
+下载脚本到nagios目录，例如/usr/local/nagios/python/weixin，修改config.py配置文件。
+
+nagios配置
+
+commands。cfg文件中添加如下配置：
+
+<
+#notify by weixin
+define command{
+        command_name    notify-host-by-weixin
+        command_line    /usr/local/nagios/python/NotifyByWeixin.py "host-@@-$NOTIFICATIONTYPE$-@@-$HOSTNAME$-@@-$HOSTSTATE$-@@-$HOSTADDRESS$-@@-$HOSTOUTPUT$-@@-$CONTACTALIAS$"
+}
+define command{
+        command_name    notify-service-by-weixin
+        command_line    /usr/local/nagios/python/NotifyByWeixin.py "service-@@-$NOTIFICATIONTYPE$-@@-$SERVICEDESC$-@@-$HOSTALIAS$-@@-$HOSTADDRESS$-@@-$SERVICESTATE$-@@-$SERVICEOUTPUT$-@@-$CONTACTALIAS$"
+}
+>
