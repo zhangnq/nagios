@@ -89,6 +89,7 @@ def send_text_message(token,content):
         host_state=content_data[3]
         host_address=content_data[4]
         host_info=content_data[5]
+        notify_contact=content_data[6]
         notify_content='** Nagios **\n\nNotification Type: '+ type1 + \
                         '\nHost: ' + host_name + \
                         '\nState: ' + host_state + \
@@ -101,6 +102,7 @@ def send_text_message(token,content):
         host_address=content_data[4]
         service_state=content_data[5]
         service_info=content_data[6]
+        notify_contact=content_data[7]
         notify_content='** Nagios **\n\nNotification Type: '+ type1 + \
                         '\nService: ' + service_desc + \
                         '\nHost: ' + host_name + \
@@ -109,10 +111,11 @@ def send_text_message(token,content):
                         '\nInfo: ' + service_info + '\n'
     else:
         notify_content='Get nagios message notify info error.\n\nContent: %s' % content
+        notify_contact=ToUser
     
     values={
-            'touser':ToUser,
-            "toparty":ToParty,
+            'touser':notify_contact,
+            #"toparty":ToParty,
             "msgtype": "text",
             "agentid": AgentId,
             "text": {
@@ -134,7 +137,7 @@ def main():
 
 if __name__ == "__main__":
     #token = get_token()
-    #content="host-@@-111-@@-222-@@-333-@@-444-@@-555"
+    #content="host-@@-111-@@-222-@@-333-@@-444-@@-555-@@-zhangnq"
     #send_text_message(token, content)
     main()
     
