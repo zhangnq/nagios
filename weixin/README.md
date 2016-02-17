@@ -50,11 +50,11 @@ commands.cfg命令文件中添加weixin命令：
 
 >define command{  
 >        command_name    notify-host-by-weixin  
->        command_line    /usr/local/nagios/python/NotifyByWeixin.py "host-@@-$NOTIFICATIONTYPE$-@@-$HOSTNAME$-@@-$HOSTSTATE$-@@-$HOSTADDRESS$-@@-$HOSTOUTPUT$-@@-$CONTACTALIAS$"  
+>        command_line    /usr/local/nagios/python/weixin/NotifyByWeixin.py "host-@@-$NOTIFICATIONTYPE$-@@-$HOSTNAME$-@@-$HOSTSTATE$-@@-$HOSTADDRESS$-@@-$HOSTOUTPUT$-@@-$CONTACTALIAS$"  
 >}  
 >define command{  
 >        command_name    notify-service-by-weixin  
->        command_line    /usr/local/nagios/python/NotifyByWeixin.py "service-@@-$NOTIFICATIONTYPE$-@@-$SERVICEDESC$-@@-$HOSTALIAS$-@@-$HOSTADDRESS$-@@-$SERVICESTATE$-@@-$SERVICEOUTPUT$-@@-$CONTACTALIAS$"  
+>        command_line    /usr/local/nagios/python/weixin/NotifyByWeixin.py "service-@@-$NOTIFICATIONTYPE$-@@-$SERVICEDESC$-@@-$HOSTALIAS$-@@-$HOSTADDRESS$-@@-$SERVICESTATE$-@@-$SERVICEOUTPUT$-@@-$CONTACTALIAS$"  
 >}  
 
 templates.cfg模板文件中添加联系人模板：
