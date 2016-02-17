@@ -9,7 +9,7 @@ config.py
 
 内容类似如下：
 
->CorpID='your corpid'
+>CorpID='your corpid'  
 >Secret='your secret'
 >DEBUG=0
 >ToUser='xxx'  //系统管理员，默认用户
