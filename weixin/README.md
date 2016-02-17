@@ -48,7 +48,6 @@ nagios配置
 
 commands.cfg命令文件中添加weixin命令：
 
->#notify by weixin  
 >define command{  
 >        command_name    notify-host-by-weixin  
 >        command_line    /usr/local/nagios/python/NotifyByWeixin.py "host-@@-$NOTIFICATIONTYPE$-@@-$HOSTNAME$-@@-$HOSTSTATE$-@@-$HOSTADDRESS$-@@-$HOSTOUTPUT$-@@-$CONTACTALIAS$"  
