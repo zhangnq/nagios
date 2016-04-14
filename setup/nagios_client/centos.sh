@@ -74,13 +74,13 @@ chmod +x restart_nrpe.sh
 
 #install nagios plugins
 cd /usr/local/nagios/libexec
-wget http://download.chekiang.info/nagios/check_tcp_stat.sh
+wget https://raw.githubusercontent.com/zhangnq/nagios/master/check_tcp_stat.sh
 chmod +x check_tcp_stat.sh
 chown nagios:nagios check_tcp_stat.sh
-wget http://download.chekiang.info/nagios/check_mem.sh
+wget https://raw.githubusercontent.com/zhangnq/nagios/master/check_mem.sh
 chmod +x check_mem.sh
 chown nagios:nagios check_mem.sh
-wget http://download.chekiang.info/nagios/check_net_traffic.sh
+wget https://raw.githubusercontent.com/zhangnq/nagios/master/check_net_traffic.sh
 chmod +x check_net_traffic.sh
 chown nagios:nagios check_net_traffic.sh
 
