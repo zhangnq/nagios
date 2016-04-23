@@ -1,0 +1,9 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+logs/*
+videos/*
+
+weixin/config.py
+weixin/token_data.pkl
