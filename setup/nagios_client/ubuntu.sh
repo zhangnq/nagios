@@ -37,14 +37,27 @@ cnt=`grep -c "/usr/local/nagios/bin/nrpe -c /usr/local/nagios/etc/nrpe.cfg -d" /
 if [ $cnt -eq 0 ];then
 	sed -i '/.*exit 0.*/i\/usr/local/nagios/bin/nrpe -c /usr/local/nagios/etc/nrpe.cfg -d' /etc/rc.local
 fi
+
 cat >>/usr/local/nagios/etc/nrpe.cfg<<"EOF"
 command[check_swap]=/usr/local/nagios/libexec/check_swap -w 90% -c 60%
 command[check_/]=/usr/local/nagios/libexec/check_disk -w 20% -c 10% -p /
+command[check_mem]=/usr/local/nagios/libexec/check_mem.sh -w 90 -c 95
+command[check_tcp_stat]=/usr/local/nagios/libexec/check_tcp_stat.sh -w 5000 -c 8000
+command[check_eth0_net_traffic]=/usr/local/nagios/libexec/check_net_traffic.sh -d eth0 -w 5M -c 10M
 EOF
+
+cd /usr/local/nagios/libexec
+wget https://raw.githubusercontent.com/zhangnq/nagios/master/check_mem.sh --no-check-certificate
+chmod +x check_mem.sh
+wget https://raw.githubusercontent.com/zhangnq/nagios/master/check_net_traffic.sh --no-check-certificate
+chmod +x check_net_traffic.sh
+wget https://raw.githubusercontent.com/zhangnq/nagios/master/check_tcp_stat.sh --no-check-certificate
+chmod +x check_tcp_stat.sh
+
 
 /usr/local/nagios/bin/nrpe -c /usr/local/nagios/etc/nrpe.cfg -d
 
-cat >restart_nrpe.sh<<"EOF"
+cat >/root/restart_nrpe.sh<<"EOF"
 #!/bin/bash
 export PATH="$PATH"
 killall nrpe
@@ -52,4 +65,6 @@ killall nrpe
 sleep 1
 ps -ef|grep nagios
 EOF
-chmod +x restart_nrpe.sh
+chmod +x /root/restart_nrpe.sh
+
+
