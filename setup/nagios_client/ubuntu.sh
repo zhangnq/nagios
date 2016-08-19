@@ -11,6 +11,7 @@ groupadd nagcmd
 usermod -a -G nagcmd nagios
 
 apt-get -y install build-essential gcc libssl-dev libssl0.9.8 make openssl
+apt-get -y install bc
 
 wget http://download.chekiang.info/nagios/setup/nagios_client/nagios-plugins-2.0.3.tar.gz
 
@@ -43,7 +44,7 @@ command[check_swap]=/usr/local/nagios/libexec/check_swap -w 90% -c 60%
 command[check_/]=/usr/local/nagios/libexec/check_disk -w 20% -c 10% -p /
 command[check_mem]=/usr/local/nagios/libexec/check_mem.sh -w 90 -c 95
 command[check_tcp_stat]=/usr/local/nagios/libexec/check_tcp_stat.sh -w 5000 -c 8000
-command[check_eth0_net_traffic]=/usr/local/nagios/libexec/check_net_traffic.sh -d eth0 -w 5M -c 10M
+command[check_net_traffic]=/usr/local/nagios/libexec/check_net_traffic.sh -d eth0 -w 5M -c 10M
 EOF
 
 cd /usr/local/nagios/libexec
