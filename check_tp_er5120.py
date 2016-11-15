@@ -26,7 +26,7 @@ index_url='http://%s:%s/logon/logon.htm' % (args.host,args.port)
 login_url='http://%s:%s/logon/loginJump.htm' % (args.host,args.port)
 logout_url='http://%s:%s/logon/logout.htm' % (args.host,args.port)
 loginconfirm_url='http://%s:%s/logon/loginConfirm.htm' % (args.host,args.port)
-username=args.usernamd
+username=args.username
 password=args.password
 
 #监控带宽阀值，单位Mbps
