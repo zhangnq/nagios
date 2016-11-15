@@ -7,14 +7,27 @@ import cookielib
 import hashlib
 import sys
 import re
+import argparse
 
-bandinfo_url='http://192.168.188.1:8080/userRpm/Monitor_bandinfo.htm'
-index_url='http://192.168.188.1:8080/logon/logon.htm'
-login_url='http://192.168.188.1:8080/logon/loginJump.htm'
-logout_url='http://192.168.188.1:8080/logon/logout.htm'
-loginconfirm_url='http://192.168.188.1:8080/logon/loginConfirm.htm'
-username='admin'
-password='password'
+parser=argparse.ArgumentParser(description="Check TP-ER5120 Traffic.")
+parser.add_argument("-H",dest="host",help="Host name argument for servers using host headers")
+parser.add_argument("-P",dest="port",default=8080,help="router http port ,default 8080.")
+parser.add_argument("-u",dest="username",help="router admin username")
+parser.add_argument("-p",dest="password",help="router admin's password")
+
+args=parser.parse_args()
+if not args.host or not args.port or not args.username or not args.password :
+    print "Critical - Invalid command,please check."
+    sys.exit(2)
+
+#定义需要用到的网址
+bandinfo_url='http://%s:%s/userRpm/Monitor_bandinfo.htm' % (args.host,args.port)
+index_url='http://%s:%s/logon/logon.htm' % (args.host,args.port)
+login_url='http://%s:%s/logon/loginJump.htm' % (args.host,args.port)
+logout_url='http://%s:%s/logon/logout.htm' % (args.host,args.port)
+loginconfirm_url='http://%s:%s/logon/loginConfirm.htm' % (args.host,args.port)
+username=args.usernamd
+password=args.password
 
 #监控带宽阀值，单位Mbps
 trans_warning=40
