@@ -7,3 +7,5 @@ videos/*
 
 weixin/config.py
 weixin/token_data.pkl
+
+.settings/*
