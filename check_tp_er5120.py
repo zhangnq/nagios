@@ -12,6 +12,7 @@ import argparse
 parser=argparse.ArgumentParser(description="Check TP-ER5120 Traffic.")
 parser.add_argument("-H",dest="host",help="Host name argument for servers using host headers")
 parser.add_argument("-P",dest="port",default=8080,help="router http port ,default 8080.")
+parser.add_argument("-I",dest="interface",default='WAN1',help="router wan interface,default WAN1.")
 parser.add_argument("-u",dest="username",help="router admin username")
 parser.add_argument("-p",dest="password",help="router admin's password")
 
@@ -28,6 +29,7 @@ logout_url='http://%s:%s/logon/logout.htm' % (args.host,args.port)
 loginconfirm_url='http://%s:%s/logon/loginConfirm.htm' % (args.host,args.port)
 username=args.username
 password=args.password
+interface=args.interface
 
 #监控带宽阀值，单位Mbps
 trans_warning=40
@@ -117,7 +119,7 @@ if login_response:
     bandinfo_response=request.do_action(bandinfo_url,method='GET')
     if bandinfo_response:
         bandinfo_html=bandinfo_response.read().decode('gb2312')
-        pattern=re.compile(r'WAN1.*,')
+        pattern=re.compile(r'%s.*,' % interface)
         result=pattern.findall(bandinfo_html)
         
         try:
