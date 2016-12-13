@@ -131,15 +131,15 @@ if login_response:
         trans_out=int(result.split(",")[2].replace('"',''))/1000000.0
         trans_total=trans_in+trans_out
         if trans_total<trans_warning:
-            print "OK - Traffic in %.2f Mbps, out %.2f Mbps, total %.2f Mbps.|total=%.2f;;;;in=%.2f;;;;out=%.2f;;;;" % (trans_in,trans_out,trans_total,trans_total,trans_in,trans_out)
+            print "OK - Traffic in %.2f Mbps, out %.2f Mbps, total %.2f Mbps.|in=%.2f;;;;out=%.2f;;;;" % (trans_in,trans_out,trans_total,trans_in,trans_out)
             opener.open(logout_url)
             sys.exit(0)
         elif trans_total>=trans_warning and trans_total<trans_critical:
-            print "Warning - Traffic in %.2f Mbps, out %.2f Mbps, total %.2f Mbps.|total=%.2f;;;;in=%.2f;;;;out=%.2f;;;;" % (trans_in,trans_out,trans_total,trans_total,trans_in,trans_out)
+            print "Warning - Traffic in %.2f Mbps, out %.2f Mbps, total %.2f Mbps.|in=%.2f;;;;out=%.2f;;;;" % (trans_in,trans_out,trans_total,trans_in,trans_out)
             opener.open(logout_url)
             sys.exit(1)
         elif trans_total>=trans_critical:
-            print "Critical - Traffic in %.2f Mbps, out %.2f Mbps, total %.2f Mbps.|total=%.2f;;;;in=%.2f;;;;out=%.2f;;;;" % (trans_in,trans_out,trans_total,trans_total,trans_in,trans_out)
+            print "Critical - Traffic in %.2f Mbps, out %.2f Mbps, total %.2f Mbps.|in=%.2f;;;;out=%.2f;;;;" % (trans_in,trans_out,trans_total,trans_in,trans_out)
             opener.open(logout_url)
             sys.exit(2)
         
