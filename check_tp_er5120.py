@@ -15,6 +15,8 @@ parser.add_argument("-P",dest="port",default=8080,help="router http port ,defaul
 parser.add_argument("-I",dest="interface",default='WAN1',help="router wan interface,default WAN1.")
 parser.add_argument("-u",dest="username",help="router admin username")
 parser.add_argument("-p",dest="password",help="router admin's password")
+parser.add_argument("-W",dest="warning",default=40,help="warning traffic,default 40Mbps.")
+parser.add_argument("-C",dest="critical",default=50,help="critical traffic,default 50Mbps.")
 
 args=parser.parse_args()
 if not args.host or not args.port or not args.username or not args.password :
@@ -30,10 +32,18 @@ loginconfirm_url='http://%s:%s/logon/loginConfirm.htm' % (args.host,args.port)
 username=args.username
 password=args.password
 interface=args.interface
-
 #监控带宽阀值，单位Mbps
-trans_warning=40
-trans_critical=50
+try:
+    trans_warning=int(args.warning)
+except:
+    print "Please input valid warning traffic,must to be a number."
+    sys.exit(2)
+try:
+    trans_critical=int(args.critical)
+except:
+    print "Please input valid critical traffic,must to be a number."
+    sys.exit(2)
+
 
 class MyRequest:
     def __init__(self): 
