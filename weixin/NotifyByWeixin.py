@@ -19,7 +19,13 @@ def url_request(url,values={},method='GET'):
         req=urllib2.Request(furl)
     elif method == 'POST':
         #data=urllib.urlencode(values)
-        data=json.dumps(values,ensure_ascii=True)
+        try:
+            data=json.dumps(values,ensure_ascii=True)
+        except:
+            import sys
+            sys_encoding=sys.stdin.encoding
+            data=json.dumps(values,ensure_ascii=True,encoding=sys_encoding)
+        
         req=urllib2.Request(url,data)
         req.add_header('Content-Type','application/json')
         req.get_method=lambda: 'POST'
