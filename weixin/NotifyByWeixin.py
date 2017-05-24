@@ -19,7 +19,7 @@ def url_request(url,values={},method='GET'):
         req=urllib2.Request(furl)
     elif method == 'POST':
         #data=urllib.urlencode(values)
-        data=json.dumps(values,ensure_ascii=False)
+        data=json.dumps(values,ensure_ascii=True)
         req=urllib2.Request(url,data)
         req.add_header('Content-Type','application/json')
         req.get_method=lambda: 'POST'
@@ -133,11 +133,9 @@ def main():
     content=args.content
     send_text_message(token, content)
     
-
-
 if __name__ == "__main__":
     #token = get_token()
-    #content="host-@@-111-@@-222-@@-333-@@-444-@@-555-@@-zhangnq"
+    #content=u"host-@@-111-@@-222-@@-333-@@-444-@@-测试-@@-zhangnq"
     #send_text_message(token, content)
     main()
     
