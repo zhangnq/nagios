@@ -45,17 +45,24 @@ echo "============================install dependency============================
 
 sleep 5
 apt-get update
-apt-get -y install libgd2-noxpm libgd2-noxpm-dev libssl-dev libssl0.9.8 make openssl
+packages='libgd2-noxpm libgd2-noxpm-dev libssl-dev libssl0.9.8 make openssl sendemail rrdtool librrds-perl'
+for package in $packages;do
+  apt-get -y install $package
+done
 
 echo "============================install apache2 ============================"
 
 sleep 5
 if [ "${is_apache:-yes}" = "yes" ];then
+    rm -rf /etc/httpd
+    rm -rf /usr/local/apache2
 	mkdir -p $cur_dir/apache
         cd $cur_dir/apache
 	wget http://download.chekiang.info/apache/ubuntu_apache.sh
 	chmod +x ubuntu_apache.sh
 	./ubuntu_apache.sh
+	
+	/etc/init.d/apache2 stop
 fi
 
 echo "============================install php ============================"
@@ -206,6 +213,8 @@ EOF
 
 update-rc.d npcd defaults
 /etc/init.d/npcd start
+
+/etc/init.d/apache2 restart
 
 #echo "============================install init==========================="
 #sleep 5
