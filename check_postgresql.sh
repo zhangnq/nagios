@@ -34,7 +34,7 @@ fi
 sql="select count(pid) from pg_stat_activity where state != 'idle' and query not ilike '%pg_stat_activity%' and now() - query_start > '10 minutes'::interval;"
 slow_query_cnt=`/opt/PostgreSQL/93/bin/psql -h 127.0.0.1 -p 5432 -U postgres -d postgres -c "$sql" -t -A`
 if [ $slow_query_cnt -ne 0 ];then
-  echo "Warning - PostgreSQL slow query count is $slow_query_cnt."
+  echo "Warning - PostgreSQL slow query count is $slow_query_cnt. | conn_ratio=$conn_ratio;80;95;;slow_query=$slow_query_cnt;;;;"
   echo 1
 fi
 
