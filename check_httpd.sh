@@ -6,7 +6,10 @@ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 error_log_path=/usr/local/apache2/logs/error_log
 num=20
 
-err_cnt=`tail -n $num $error_log_path|grep ajp_ilink_receive|grep -cv grep`
+year=`date "+%Y"`
+day=`date "+%d"`
+hour=`date "+%H"`
+err_cnt=`tail -n $num $error_log_path|grep "$day $hour:[0-9]*:[0-9]* $year] .* ajp_ilink_receive"|grep -cv grep`
 let ratio=($err_cnt*100)/$num
 if [ $ratio -gt 80 ];then
   echo "Critical - apache ajp receive timeout,ratio ${ratio}%."
